@@ -265,6 +265,9 @@
                 },
 
                 error: function (xhr, status, error) {
+                    swal.close();
+                    var errortxt = xhr.responseText ? xhr.responseText : 'Error to complete your request. Please try again.';
+                    sweetAlert(oopsStr, errortxt, "error");
                     //alert(xhr.responseText); // error occur 
                 }
 

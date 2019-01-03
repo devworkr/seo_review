@@ -130,7 +130,7 @@ class SeoReview {
 
     public function send_verification() {
         if (isset($_POST['emailaddress']) && $_POST['emailaddress']) {
-            $verificationcode = bin2hex(random_bytes(10));
+            $verificationcode = rand(100000,999999);
             $emailaddress = $_POST['emailaddress'];
             $expire_time = strtotime(date("Y-m-d H:i:s", strtotime('+24 hours')));
             //insert into table
