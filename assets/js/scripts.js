@@ -68,7 +68,7 @@
             ajaxurl: seo_review_object.ajax_url,
             apiurl: 'https://example.com/ajax/sitevssite',
             axPath: 'https://example.com/domains',
-            reportPath: 'https://example.com/compare/[domain1]/vs/[domain2]'
+            reportPath: 'https://example.com/compare/[domain1]/vs/[domain2]/gaf834knkfa'
         },
         initilaize: function () {
             form = this.settings;
@@ -110,8 +110,8 @@
                 if (response.status == 'success') {
 
                     swal({
-                        title: 'sent',
-                        text: 'we sent you an email verification code at ' + emailaddress + '. Please enter the code below.',
+                        title: 'Verify Your Email',
+                        text: 'We sent you an email verification code at ' + emailaddress + '. Please enter the code below.',
                         type: "input",
                         closeOnConfirm: false,
                         showCancelButton: true,
@@ -175,12 +175,11 @@
                     reportpath = reportpath.replace("[domain1]", websiteUrl).replace("[domain2]", competitorUrl);
                     //window.location.href = comparePath;
 
-                    seoreview.makeCall(reportpath, {}, function (html) {
-                        $('#seo_report').html(html);
-                        $('#seo_report .main-content, #seo_report footer').remove();
+                    /*seoreview.makeCall(reportpath, {}, function (html) {*/
+                        $('#seo_report').html('<iframe id="content_frame" src="'+reportpath+'"></iframe>');
                         $('.seo_result_wrap').show();
                         swal.close();
-                    });
+                    /*}); */
                 } else if (myDomainsArr[0] == '3') {
                     //Domains not found on DB
                     pendingStats = 1;
@@ -250,7 +249,6 @@
                 async: true,
                 crossDomain: true,
                 data: formdata, // data to send in ajax format or querystring format
-                datatype: 'json',
                 beforeSend: function () {
                     //alert('sending data');
                     // do some loading options
@@ -466,15 +464,9 @@
                                                                                                                                                         reportpath = reportpath.replace("[domain1]", websiteUrl).replace("[domain2]", competitorUrl);
                                                                                                                                                         //window.location.href = comparePath;
 
-                                                                                                                                                        seoreview.makeCall(reportpath, {}, function (html) {
-                                                                                                                                                            //var htmllength = html.length;
-                                                                                                                                                            //var dataindex = html.indexOf('<div class="container">');
-                                                                                                                                                            //var originalcontent = html.slice(dataindex,htmllength);
-                                                                                                                                                            $('#seo_report').html(html);
-                                                                                                                                                            $('#seo_report .main-content, #seo_report footer').remove();
-                                                                                                                                                            $('.seo_result_wrap').show();
-                                                                                                                                                            swal.close();
-                                                                                                                                                        });
+                                                                                                                                                        $('#seo_report').html('<iframe id="content_frame" src="'+reportpath+'"></iframe>');
+                                                                                                                                                        $('.seo_result_wrap').show();
+                                                                                                                                                        swal.close();
                                                                                                                                                     } else {
                                                                                                                                                         pendingStats = 0;
                                                                                                                                                         passScore = 0;
